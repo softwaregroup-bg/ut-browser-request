@@ -1,46 +1,36 @@
 {
   "name": "browser-request",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "author": {
     "name": "Jason Smith",
     "email": "jhs@iriscouch.com"
   },
+  "contributors": [{
+    "name": "James Doyle",
+    "email": "james.doyle@invokemedia.com"
+  }],
   "description": "Browser port of the Node.js 'request' package",
   "license": "Apache 2.0",
   "keywords": [
     "request",
     "http",
     "browser",
-    "browserify"
+    "ajax"
   ],
-  "homepage": "http://github.com/iriscouch/browser-request",
+  "homepage": "http://github.com/invokemedia/browser-request",
   "repository": {
     "type": "git",
-    "url": "git://github.com/iriscouch/browser-request"
+    "url": "git://github.com/invokemedia/browser-request"
   },
   "scripts": {
-    "test": "beefy test.js"
+    "test": "node test-run.js",
+    "build": "browserify index.js -o browser-request.js"
   },
   "devDependencies": {
-    "tape": "~1.0.4",
-    "beefy": "~0.4.0",
-    "browserify": "~2.25.0"
+    "tape": "~4.6.*",
+    "tape-run": "^2.1.4"
   },
   "engines": [
     "node"
-  ],
-  "testling": {
-    "files": "test.js",
-    "browsers": [
-      "ie/6..latest",
-      "firefox/3..5",
-      "firefox/19..nightly",
-      "chrome/4..7",
-      "chrome/24..canary",
-      "opera/10..next",
-      "safari/4..latest",
-      "iphone/6",
-      "ipad/6"
-    ]
-  }
+  ]
 }
