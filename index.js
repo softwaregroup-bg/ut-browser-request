@@ -241,11 +241,6 @@ function run_xhr(options) {
     xhr.setRequestHeader(key, options.headers[key])
   }
 
-  xhr.onerror = function(err) {
-    // There was a connection error of some sort
-    options.callback(err, xhr, xhr.body);
-  };
-
   xhr.send(options.body)
   return xhr
 
