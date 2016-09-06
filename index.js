@@ -295,6 +295,14 @@ function run_xhr(options) {
       did.end = true
 
       return options.callback(cors_err, xhr)
+    } else if(xhr.statusCode === XHR.UNSENT) {
+      var network_err = new Error('Network connection error')
+
+      // Do not process this request further.
+      did.loading = true
+      did.end = true
+
+      return options.callback(network_err, xhr)
     }
 
     options.onResponse(null, xhr)
