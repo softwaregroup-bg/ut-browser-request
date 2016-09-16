@@ -297,6 +297,7 @@ function run_xhr(options) {
       return options.callback(cors_err, xhr)
     } else if(xhr.statusCode === XHR.UNSENT) {
       var network_err = new Error('Network connection error')
+      network_err.code = 'ENETWORK'
 
       // Do not process this request further.
       did.loading = true
