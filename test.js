@@ -1,10 +1,10 @@
-var test = require('tape')
+var test = require('tape');
 
-var request = require('./')
+var request = require('./');
 
 test('try a normal GET', function(t) {
   var url = 'https://raw.githubusercontent.com/iriscouch/browser-request/master/package.json';
-  request(url, function(err, resp, body) {
+  request(url, function(err, resp) {
     t.equal(resp.statusCode, 200);
     t.equal(!!resp.body.match(/browser-request/), true);
     t.end();
@@ -132,4 +132,21 @@ test('blob true', function(t) {
     t.equal(!!blob.type.match(/^image/), true);
     t.end();
   });
+});
+
+test('try to abort a GET', function(t) {
+  var url = './package.json';
+  var req = request(url, function(err) {
+    t.equal(err.toString(), 'Error: Network connection error');
+    t.end();
+  });
+  req.abort();
+});
+
+test('try to abort a CORS GET', function(t) {
+  var url = 'http://httpbin.org/get';
+  request(url, function(err) {
+    t.equal(err.toString(), 'Error: CORS request rejected: ' + url);
+    t.end();
+  }).abort();
 });
