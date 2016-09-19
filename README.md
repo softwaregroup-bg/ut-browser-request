@@ -115,7 +115,7 @@ You can test this library with `phantomjs`. You just need to run:
 
     $ npm test
 
-This will run the `test-run.js`, which wraps up `test.js` for the browser/phantom.
+This will run the `test-run.js`, which wraps up `test.js` for the browser/phantom. You will need to make sure `devDependecies` are installed.
 
 ## License
 
