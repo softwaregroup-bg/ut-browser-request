@@ -29,6 +29,7 @@
     "build": "browserify index.js -o browser-request.js"
   },
   "devDependencies": {
+    "phantomjs": "^2.1.0",
     "browserify": "^13.1.0",
     "tape": "~4.6.*",
     "tape-run": "^2.1.4"
