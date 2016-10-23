@@ -2,11 +2,11 @@
 
 Browser Request is a port of Mikeal Rogers's ubiquitous and excellent [request][req] package to the browser.
 
+**And this is a fork of [iriscouch/browser-request](https://github.com/iriscouch/browser-request).**
+
 Jealous of Node.js? Pining for clever callbacks? Request is for you.
 
 Don't care about Node.js? Looking for less tedium and a no-nonsense API? Request is for you too.
-
-[![browser support](https://ci.testling.com/iriscouch/browser-request.png)](https://ci.testling.com/maxogden/browser-request)
 
 # Examples
 
@@ -23,7 +23,10 @@ request('/some/resource.txt', function(er, response, body) {
 Send a resource:
 
 ```javascript
-request.put({uri:'/some/resource.xml', body:'<foo><bar/></foo>'}, function(er, response) {
+request.put({
+  uri:'/some/resource.xml',
+  body:'<foo><bar/></foo>'
+}, function(er, response) {
   if(er)
     throw new Error("XML PUT failed (" + er + "): HTTP status was " + response.status);
   console.log("Stored the XML");
@@ -33,20 +36,24 @@ request.put({uri:'/some/resource.xml', body:'<foo><bar/></foo>'}, function(er, r
 To work with JSON, set `options.json` to `true`. Request will set the `Content-Type` and `Accept` headers, and handle parsing and serialization.
 
 ```javascript
-request({method:'POST', url:'/db', body:'{"relaxed":true}', json:true}, on_response)
-
-function on_response(er, response, body) {
+request({
+  method:'POST',
+  url:'/db',
+  body:'{"relaxed":true}',
+  json:true
+}, on_response)
+function on_response(er, response, result) {
   if(er)
     throw er
-  if(result.ok)
-    console.log('Server ok, id = ' + result.id)
+  if(response.ok)
+    console.log('Server ok, id = ' + response.id)
 }
 ```
 
 Or, use this shorthand version (pass data into the `json` option directly):
 
 ```javascript
-request({method:'POST', url:'/db', json:{relaxed:true}}, on_response)
+request({method:'POST', url:'/db', json: { relaxed:true } }, on_response)
 ```
 
 ## Convenient CouchDB
@@ -73,9 +80,9 @@ See the [Node.js Request README][req] for several more examples. Request intends
 
 Browser Request is a [browserify][browserify]-enabled package.
 
-First, add `browser-request` to your Node project
+This project is not on npm.org. You can still install it via npm:
 
-    $ npm install browser-request
+    $ npm install git+https://github.com/invokemedia/browser-request.git
 
 Next, make a module that uses the package.
 
@@ -94,13 +101,22 @@ request('/', function(er, res) {
 
 To build this for the browser, run it through browserify.
 
-    $ browserify --entry example.js --outfile example-built.js
+    $ npm run build
 
-Deploy `example-built.js` to your web site and use it from your page.
+Deploy `browser-request.js` to your web site and use it from your page.
 
 ```html
-  <script src="example-built.js"></script> <!-- Runs the request, outputs the result to the console -->
+  <script src="browser-request.js"></script> <!-- Runs the request, outputs the result to the console -->
 ```
+
+## Test
+
+You can test this library with `phantomjs`. You just need to run:
+
+    $ npm test
+
+This will run the `test-run.js`, which wraps up `test.js` for the browser/phantom. You will need to make sure `devDependecies` are installed.
+
 ## License
 
 Browser Request is licensed under the Apache 2.0 license.
