@@ -26,7 +26,8 @@
   },
   "scripts": {
     "test": "node test-run.js",
-    "build": "browserify index.js -o browser-request.js"
+    "build": "browserify index.js -o browser-request.js",
+    "jenkins": "npm publish"
   },
   "devDependencies": {
     "phantomjs": "^2.1.0",
