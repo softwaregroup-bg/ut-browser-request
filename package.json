@@ -1,6 +1,6 @@
 {
-  "name": "browser-request",
-  "version": "0.5.1",
+  "name": "ut-browser-request",
+  "version": "1.0.0",
   "author": {
     "name": "Jason Smith",
     "email": "jhs@iriscouch.com"
