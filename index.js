@@ -67,15 +67,15 @@ function request(options, callback) {
     throw new Error("options.uri must be a string");
   }
 
-  var unsupported_options = ['proxy', '_redirectsFollowed', 'maxRedirects']
+  var unsupported_options = ['proxy', '_redirectsFollowed', 'maxRedirects', 'followRedirect']
   for (var i = 0; i < unsupported_options.length; i++)
     if (options[unsupported_options[i]]) {
       throw new Error("options." + unsupported_options[i] + " is not supported")
     }
 
-  if ('followRedirect' in options && !options.followRedirect) {
-    throw new Error("options.followRedirect == false is not supported")
-  }
+  // if ('followRedirect' in options && !options.followRedirect) {
+  //   throw new Error("options.followRedirect == false is not supported")
+  // }
   options.callback = callback
   options.method = options.method || 'GET';
   options.headers = options.headers || {};
@@ -237,9 +237,9 @@ function run_xhr(options) {
     xhr.withCredentials = !!options.withCredentials
   }
 
-  for (var key in options.headers) {
-    xhr.setRequestHeader(key, options.headers[key])
-  }
+  // for (var key in options.headers) {
+  //   xhr.setRequestHeader(key, options.headers[key])
+  // }
 
   xhr.send(options.body)
   return xhr
@@ -336,18 +336,16 @@ function run_xhr(options) {
     request.log.debug('Request done', {
       'id': xhr.id
     })
-
     if (options.blob) {
       xhr.body = xhr.response;
-    } else {
-      xhr.body = xhr.responseText
-    }
-    if (options.json) {
+    } else if (options.json) {
       try {
         xhr.body = JSON.parse(xhr.responseText)
       } catch (er) {
         return options.callback(er, xhr)
       }
+    } else {
+      xhr.body = xhr.responseText
     }
 
     options.callback(null, xhr, xhr.body)
