@@ -38,13 +38,14 @@ function request(options, callback) {
     throw new Error('No options given')
   }
 
+  var isFormData = options.body instanceof window.FormData
   var options_onResponse = options.onResponse; // Save this for later.
 
   if (typeof options === 'string') {
     options = {
       'uri': options
     };
-  } else {
+  } else if (!isFormData) {
     options = JSON.parse(JSON.stringify(options)); // Use a duplicate for mutating.
   }
 
@@ -86,7 +87,7 @@ function request(options, callback) {
     throw new Error("Options.headers.host is not supported");
   }
 
-  if (options.json) {
+  if (options.json && !isFormData) { // allow XHR to generate correct content type and boundary
     options.headers.accept = options.headers.accept || 'application/json'
     if (options.method !== 'GET') {
       options.headers['content-type'] = 'application/json'
