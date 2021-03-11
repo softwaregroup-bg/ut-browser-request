@@ -1,6 +1,6 @@
 {
   "name": "ut-browser-request",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "author": {
     "name": "Jason Smith",
     "email": "jhs@iriscouch.com"
@@ -36,6 +36,6 @@
     "tape-run": "^2.1.4"
   },
   "engines": {
-    "node": "^14.15.1"
+    "node": "^14.15.3"
   }
 }
