@@ -19,10 +19,10 @@
     "browser",
     "ajax"
   ],
-  "homepage": "http://github.com/invokemedia/browser-request",
+  "homepage": "http://github.com/softwaregroup-bg/ut-browser-request",
   "repository": {
     "type": "git",
-    "url": "git://github.com/invokemedia/browser-request"
+    "url": "git@github.com:softwaregroup-bg/ut-browser-request.git"
   },
   "scripts": {
     "test": "node test-run.js",
@@ -36,6 +36,6 @@
     "tape-run": "^2.1.4"
   },
   "engines": {
-    "node": "^14.15.3"
+    "node": "^14.15.3 ^16.14.0"
   }
 }
