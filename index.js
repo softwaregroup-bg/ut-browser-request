@@ -312,7 +312,15 @@ function run_xhr(options) {
 
       return options.callback(network_err, xhr)
     }
-
+    xhr.headers = xhr
+      .getAllResponseHeaders()
+      .split('\r\n')
+      .filter(Boolean)
+      .reduce((prev, next) => {
+          const [k, v] = next.split(': ');
+          prev[k] = v;
+          return prev;
+      }, {});
     options.onResponse(null, xhr)
   }
 
